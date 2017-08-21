@@ -1,0 +1,29 @@
+package org.spring.boot.data.jpa.mysql.example.services;
+
+import org.spring.boot.data.jpa.mysql.example.domain.User;
+import org.spring.boot.data.jpa.mysql.example.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User getOne(Long id) {
+        return userRepository.findOne(id);
+    }
+}
