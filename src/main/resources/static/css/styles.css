@@ -1,0 +1,16 @@
+.table-hover tbody th, .table-hover tbody td {
+    text-align: left;
+    padding: 8px;
+}
+
+.table-hover tbody tr:nth-child(even){background-color: #f2f2f2}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background: #bae2bb;
+    color: darkgreen;
+}
+
+.table-hover thead tr {
+    background-color: #4CAF50;
+    color: white;
+}

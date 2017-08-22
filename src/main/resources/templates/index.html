@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Spring Boot Data JPA MySQL project</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link th:href="@{/css/styles.css}" rel="stylesheet" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    </head>
+    <body>
+        <div class="container">
+            <h2>Users list</h2>
+            <p>Users are retrieved from MySQl with Spring Boot Data JPA:</p>
+            <table class="table table-responsive table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>E-mail</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.getId()}">1</td>
+                        <td th:text="${user.getFirstName()}">1</td>
+                        <td th:text="${user.getLastName()}">1</td>
+                        <td th:text="${user.getEmail()}">1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

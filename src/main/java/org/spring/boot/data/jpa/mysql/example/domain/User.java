@@ -55,4 +55,9 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%5d%40s%40s%40s", id, firstName, lastName, email);
+    }
 }
