@@ -13,4 +13,6 @@ public interface UserService {
     User getByEmail(String email);
 
     void add(User user);
+
+    void delete(Long id);
 }

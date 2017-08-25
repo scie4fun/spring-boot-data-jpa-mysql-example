@@ -32,13 +32,25 @@ public class HomeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    @RequestMapping(value = "/users", method = RequestMethod.POST, params = "add")
     public ModelAndView addUser(HttpServletRequest request) {
         String first = request.getParameter("first");
         String last = request.getParameter("last");
         String email = request.getParameter("email");
         if (userService.getByEmail(email) == null)
             userService.add(new User(first, last, email));
+
+        ModelAndView modelAndView = new ModelAndView("users");
+        modelAndView.addObject("users", userService.getAll());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/users", method = RequestMethod.POST, params = "delete")
+    public ModelAndView deleteUser(HttpServletRequest request) {
+        String requestId = request.getParameter("delete");
+        Long id = !requestId.equals("") ? Long.parseLong(request.getParameter("delete")) : -1;
+        if (!(userService.getOne(id) == null))
+            userService.delete(id);
 
         ModelAndView modelAndView = new ModelAndView("users");
         modelAndView.addObject("users", userService.getAll());
