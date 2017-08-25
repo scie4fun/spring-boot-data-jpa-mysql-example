@@ -49,8 +49,9 @@ public class HomeController {
     public ModelAndView deleteUser(HttpServletRequest request) {
         String requestId = request.getParameter("delete");
         Long id = !requestId.equals("") ? Long.parseLong(request.getParameter("delete")) : -1;
-        if (!(userService.getOne(id) == null))
-            userService.delete(id);
+        if (id != -1)
+            if (userService.getOne(id) != null)
+                userService.delete(id);
 
         ModelAndView modelAndView = new ModelAndView("users");
         modelAndView.addObject("users", userService.getAll());
