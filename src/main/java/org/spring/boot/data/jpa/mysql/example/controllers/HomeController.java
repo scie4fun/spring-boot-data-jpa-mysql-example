@@ -45,6 +45,18 @@ public class HomeController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/users", method = RequestMethod.POST, params = "edit-first")
+    public ModelAndView editUser(HttpServletRequest request) {
+        String requestId = request.getParameter("edit-first");
+//        Long id = !requestId.equals("") ? Long.parseLong(request.getParameter("edit-first")) : -1;
+//        if (id != -1 && userService.getOne(id) != null)
+//            userService.delete(id);
+
+        ModelAndView modelAndView = new ModelAndView("users");
+        modelAndView.addObject("users", userService.getAll());
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/users", method = RequestMethod.POST, params = "delete")
     public ModelAndView deleteUser(HttpServletRequest request) {
         String requestId = request.getParameter("delete");

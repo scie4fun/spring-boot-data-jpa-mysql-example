@@ -1,17 +1,9 @@
 let selected = false;
 
 $(document).ready(function () {
-    //addClickEvent();
-    $('.edit-first').hide();
-    swapCells();
+    addClickEvent();
+    //getCurrentColumnName();
 });
-
-function swapCells() {
-    $('.editable-cell').on( 'click', function () {
-        $(this).hide();
-        $('#edit-first').show();
-    });
-}
 
 function getCurrentColumnName() {
     $('.editable-cell').on( 'click', function () {
@@ -37,6 +29,8 @@ function edit(selector) {
         $('#selected').keydown(function (event) {
             let keyCode = (event.keyCode ? event.keyCode : event.which);
             if (keyCode === 13 && $('#selected').val() !== '') {
+                /*let text = $('#selected').val();
+                $(selector).text(text);*/
                 this.form.submit();
                 selected = false;
                 addClickEvent();
@@ -53,3 +47,5 @@ function getForm(text) {
             'id=\"' + 'selected' + '\"' +
             '/>';
 }
+
+//https://stackoverflow.com/questions/17921647/jquery-form-submission-when-form-nested-in-table
