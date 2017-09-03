@@ -45,12 +45,16 @@ public class HomeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST, params = "edit-first")
+    @RequestMapping(value = "/users", method = RequestMethod.POST, params = "edit")
     public ModelAndView editUser(HttpServletRequest request) {
-        String requestId = request.getParameter("edit-first");
-//        Long id = !requestId.equals("") ? Long.parseLong(request.getParameter("edit-first")) : -1;
-//        if (id != -1 && userService.getOne(id) != null)
-//            userService.delete(id);
+        String requestId = request.getParameter("edit");
+        Long id = !requestId.equals("") ? Long.parseLong(request.getParameter("edit")) : -1;
+        if (id != -1 && userService.getOne(id) != null) {
+            String firstName = request.getParameter("edit-first-" + requestId);
+            String lastName = request.getParameter("edit-last-" + requestId);
+            String email = request.getParameter("edit-email-" + requestId);
+            userService.update(id, firstName, lastName, email);
+        }
 
         ModelAndView modelAndView = new ModelAndView("users");
         modelAndView.addObject("users", userService.getAll());
@@ -61,9 +65,8 @@ public class HomeController {
     public ModelAndView deleteUser(HttpServletRequest request) {
         String requestId = request.getParameter("delete");
         Long id = !requestId.equals("") ? Long.parseLong(request.getParameter("delete")) : -1;
-        if (id != -1)
-            if (userService.getOne(id) != null)
-                userService.delete(id);
+        if (id != -1 && userService.getOne(id) != null)
+            userService.delete(id);
 
         ModelAndView modelAndView = new ModelAndView("users");
         modelAndView.addObject("users", userService.getAll());
@@ -78,3 +81,10 @@ public class HomeController {
         return modelAndView;
     }
 }
+
+/*
+
+https://stackoverflow.com/questions/16119421/thymeleaf-concatenation-could-not-parse-as-expression
+https://stackoverflow.com/questions/26526037/javascript-function-call-with-thymeleaf
+
+*/

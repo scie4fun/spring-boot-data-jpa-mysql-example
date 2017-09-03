@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(id);
     }
 
+    @Override
+    public void update(Long id, String firstName, String lastName, String email) {
+        userRepository.update(id, firstName, lastName, email);
+    }
+
 }

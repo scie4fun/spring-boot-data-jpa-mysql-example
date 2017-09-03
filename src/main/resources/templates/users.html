@@ -49,27 +49,47 @@
         <table class="table table-response row" id="crud-table">
             <thead>
             <tr>
-                <th class="col-md-3">Id</th>
+                <th class="col-md-1">Id</th>
                 <th class="col-md-3">First Name</th>
                 <th class="col-md-3">Last Name</th>
                 <th class="col-md-3">E-mail</th>
-                <th class="col-md-3"></th>
+                <th class="col-md-1"></th>
+                <th class="col-md-1"></th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user : ${users}">
                 <td class="editable-cell" th:text="${user.getId()}">1</td>
-                <td class="editable-cell" th:text="${user.getFirstName()}">1</td>
-                <td>
-                    <input name="edit-first"
-                           th:type="submit"
-                           th:value="${user.getFirstName()}"
-                           class="form-control edit-first"/>
+                <td class="editable-cell">
+                    <p class="data" th:text="${user.getFirstName()}"></p>
+                    <input name="edit-first-${user.getId()}"
+                           value="${user.getFirstName()}"
+                           class="form-control edit"
+                    />
                 </td>
-                <td class="editable-cell" th:text="${user.getLastName()}">1</td>
-                <td class="editable-cell" th:text="${user.getEmail()}">1</td>
+                <td class="editable-cell" th:text="${user.getLastName()}">
+                    <p class="data" th:text="${user.getLastName()}"></p>
+                    <input name="edit-last-${user.getId()}"
+                           value="${user.getFirstName()}"
+                           class="form-control edit"
+                    />
+                </td>
+                <td class="editable-cell" th:text="${user.getEmail()}">
+                    <p class="data" th:text="${user.getEmail()}"></p>
+                    <input name="edit-email-${user.getId()}"
+                           value="${user.getFirstName()}"
+                           class="form-control edit"
+                    />
+                </td>
                 <td>
-                    <button th:value="${user.getId()}" name="delete" th:type="submit" class="btn btn-default">Delete
+                    <button th:value="${user.getId()}"
+                            name="edit" th:type="submit"
+                            class="btn btn-success edit-btn">
+                        Edit
+                    </button>
+                </td>
+                <td>
+                    <button th:value="${user.getId()}" name="delete" th:type="submit" class="btn btn-danger">Delete
                     </button>
                 </td>
             </tr>
