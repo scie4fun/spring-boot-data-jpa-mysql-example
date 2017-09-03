@@ -31,12 +31,11 @@ function edit(selector) {
 }
 
 function getForm(text) {
-    return form =
-        '<input ' +
-        'class=\"form-control\" ' +
-        'value=\"' + text + '\" ' +
-        'id=\"' + 'selected' + '\"' +
-        '/>';
+    return  '<input ' +
+            'class=\"form-control\" ' +
+            'value=\"' + text + '\" ' +
+            'id=\"' + 'selected' + '\"' +
+            '/>';
 }
 
 //https://stackoverflow.com/questions/17921647/jquery-form-submission-when-form-nested-in-table
