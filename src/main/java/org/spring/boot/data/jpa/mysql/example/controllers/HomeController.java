@@ -25,12 +25,19 @@ public class HomeController {
         return "redirect:/users";
     }
 
-    @RequestMapping("/users")
+    @RequestMapping(value = "/users")
     public ModelAndView users() {
         ModelAndView modelAndView = new ModelAndView("users");
         modelAndView.addObject("users", userService.getAll());
         return modelAndView;
     }
+
+//    @RequestMapping(value = "/users", method = RequestMethod.GET, params = "edit")
+//    public ModelAndView onEditUsers() {
+//        ModelAndView modelAndView = new ModelAndView("users");
+//        modelAndView.addObject("users", userService.getAll());
+//        return modelAndView;
+//    }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST, params = "add")
     public ModelAndView addUser(HttpServletRequest request) {
@@ -45,21 +52,21 @@ public class HomeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST, params = "edit")
-    public ModelAndView editUser(HttpServletRequest request) {
-        String requestId = request.getParameter("edit");
-        Long id = !requestId.equals("") ? Long.parseLong(request.getParameter("edit")) : -1;
-        if (id != -1 && userService.getOne(id) != null) {
-            String firstName = request.getParameter("edit-first-" + requestId);
-            String lastName = request.getParameter("edit-last-" + requestId);
-            String email = request.getParameter("edit-email-" + requestId);
-            userService.update(id, firstName, lastName, email);
-        }
-
-        ModelAndView modelAndView = new ModelAndView("users");
-        modelAndView.addObject("users", userService.getAll());
-        return modelAndView;
-    }
+//    @RequestMapping(value = "/users", method = RequestMethod.POST, params = "save-edit")
+//    public ModelAndView editUser(HttpServletRequest request) {
+//        String requestId = request.getParameter("edit");
+//        Long id = !requestId.equals("") ? Long.parseLong(request.getParameter("save-edit")) : -1;
+//        if (id != -1 && userService.getOne(id) != null) {
+//            String firstName = request.getParameter("edit-first-" + requestId);
+//            String lastName = request.getParameter("edit-last-" + requestId);
+//            String email = request.getParameter("edit-email-" + requestId);
+//            userService.update(id, firstName, lastName, email);
+//        }
+//
+//        ModelAndView modelAndView = new ModelAndView("users");
+//        modelAndView.addObject("users", userService.getAll());
+//        return modelAndView;
+//    }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST, params = "delete")
     public ModelAndView deleteUser(HttpServletRequest request) {
@@ -81,10 +88,3 @@ public class HomeController {
         return modelAndView;
     }
 }
-
-/*
-
-https://stackoverflow.com/questions/16119421/thymeleaf-concatenation-could-not-parse-as-expression
-https://stackoverflow.com/questions/26526037/javascript-function-call-with-thymeleaf
-
-*/

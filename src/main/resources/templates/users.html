@@ -49,8 +49,8 @@
         <table class="table table-response row" id="crud-table">
             <thead>
             <tr>
-                <th class="col-md-1">Id</th>
-                <th class="col-md-3">First Name</th>
+                <th class="col-md-2">Id</th>
+                <th class="col-md-2">First Name</th>
                 <th class="col-md-3">Last Name</th>
                 <th class="col-md-3">E-mail</th>
                 <th class="col-md-1"></th>
@@ -59,44 +59,58 @@
             </thead>
             <tbody>
             <tr th:each="user : ${users}">
-                <td class="editable-cell" th:text="${user.getId()}">1</td>
-                <td class="editable-cell">
-                    <p class="data" th:text="${user.getFirstName()}"></p>
-                    <input name="edit-first-${user.getId()}"
-                           value="${user.getFirstName()}"
-                           class="form-control edit"
-                    />
-                </td>
-                <td class="editable-cell" th:text="${user.getLastName()}">
-                    <p class="data" th:text="${user.getLastName()}"></p>
-                    <input name="edit-last-${user.getId()}"
-                           value="${user.getFirstName()}"
-                           class="form-control edit"
-                    />
-                </td>
-                <td class="editable-cell" th:text="${user.getEmail()}">
-                    <p class="data" th:text="${user.getEmail()}"></p>
-                    <input name="edit-email-${user.getId()}"
-                           value="${user.getFirstName()}"
-                           class="form-control edit"
-                    />
-                </td>
+                <td class="data" th:text="${user.getId()}"></td>
+                <td class="data-first" th:text="${user.getFirstName()}"></td>
+                <td class="data" th:text="${user.getLastName()}"></td>
+                <td class="data" th:text="${user.getEmail()}"></td>
+
                 <td>
-                    <button th:value="${user.getId()}"
-                            name="edit" th:type="submit"
-                            class="btn btn-success edit-btn">
+                    <button class="btn btn-primary edit-btn"
+                            type="reset"
+                            data-toggle="modal" data-target="#myModal">
                         Edit
                     </button>
                 </td>
                 <td>
-                    <button th:value="${user.getId()}" name="delete" th:type="submit" class="btn btn-danger">Delete
+                    <button th:value="${user.getId()}"
+                            th:name="delete"
+                            class="btn btn-danger">
+                        Delete
                     </button>
                 </td>
             </tr>
             </tbody>
         </table>
     </form>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input class="form-control"/>
+                        <input class="form-control"/>
+                        <input class="form-control"/>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Apply</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 </body>
 </html>
+
+//https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
